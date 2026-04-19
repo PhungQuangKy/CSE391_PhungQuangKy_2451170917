@@ -76,6 +76,28 @@ Tại sao KHÔNG NÊN dùng table để tạo layout trang web?
 
 -Trình duyệt thường phải đợi tải hết toàn bộ nội dung trong thẻ <table> mới bắt đầu hiển thị bảng đó ra màn hình. Điều này làm trải nghiệm người dùng bị chậm lại so với việc dùng các thẻ `<div>` hoặc thẻ Semantic.
 
+##Câu B3:
+```
+Lỗi 1: Dòng 1 — Thiếu khai báo html trong DOCTYPE — Sửa: Thay <!DOCTYPE> bằng <!DOCTYPE html>.
+
+Lỗi 2: Dòng 3 — Thiếu thẻ đóng cho <title> — Sửa: Thêm </title> sau nội dung tiêu đề.
+
+Lỗi 3: Dòng 4 — Sai định dạng thuộc tính charset — Sửa: Thay utf8 bằng utf-8 (có dấu gạch ngang).
+
+Lỗi 4: Dòng 6 — Thẻ <h1> không được đóng đúng cách — Sửa: Đổi <h1>Welcome...<h1> thành <h1>Welcome...</h1>.
+
+Lỗi 5: Dòng 10 — Thẻ <a> đóng sai cú pháp — Sửa: Đổi <a>Trang chủ<a> thành <a href="home">Trang chủ</a>.
+
+Lỗi 6: Dòng 17 — Thuộc tính src của ảnh thiếu dấu ngoặc kép — Sửa: Đổi thành src="iphone.jpg" và nên thêm thuộc tính alt.
+
+Lỗi 7: Dòng 19 — Sai thứ tự đóng thẻ lồng nhau (Overlap) — Sửa: Đổi <p>Giá: <b>25...đ</p></b> thành <p>Giá: <b>25...đ</b></p>.
+
+Lỗi 8: Dòng 34 — Sử dụng thẻ <main> lần thứ hai — Sửa: Một trang web chỉ được phép có duy nhất một thẻ <main>. Đoạn nội dung sidebar nên dùng thẻ <aside>.
+
+Lỗi 9: Dòng 38 — Thẻ <footer> thiếu thẻ đóng </footer> — Sửa: Thêm </footer> sau đoạn văn bản bản quyền.
+
+Lỗi 10: Tổng thể — Cấu trúc phân cấp sai — Sửa: Thẻ <header> và <h1> nên được bọc trong một khối chung, không nên để <h1> nằm ngoài header hoặc trôi lơ lửng trên đầu một cách rời rạc.
+
 
 
 
