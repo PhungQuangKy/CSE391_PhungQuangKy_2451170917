@@ -1,1 +1,98 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giới thiệu Sản phẩm Multimedia</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; padding: 20px; max-width: 900px; margin: auto; background-color: #f4f4f4; }
+        section { background: white; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        h2 { border-bottom: 2px solid #333; padding-bottom: 10px; }
+        
+        /* CSS cho ảnh responsive theo yêu cầu bài tập */
+        img { max-width: 100%; height: auto; display: block; border-radius: 4px; }
+        
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        figure { margin: 0; background: #eee; padding: 10px; border-radius: 5px; text-align: center; }
+        figcaption { margin-top: 8px; font-style: italic; color: #555; }
+        
+        iframe, video { width: 100%; border-radius: 8px; margin-top: 10px; }
+    </style>
+</head>
+<body>
 
+    <header style="text-align: center; margin-bottom: 30px;">
+        <!-- SVG Inline: Logo đơn giản hình tròn và vuông -->
+        <svg width="100" height="100" viewBox="0 0 100 100" style="display: inline-block;">
+            <rect x="10" y="10" width="80" height="80" fill="#3498db" />
+            <circle cx="50" cy="50" r="30" fill="#f1c40f" />
+            <text x="50" y="55" font-size="12" text-anchor="middle" fill="black" font-weight="bold">LOGO</text>
+        </svg>
+        <h1>Công Nghệ Future Store</h1>
+    </header>
+
+    <!-- 1. Ít nhất 3 ảnh sản phẩm dùng figure + figcaption -->
+    <section>
+        <h2>Sản phẩm nổi bật</h2>
+        <div class="product-grid">
+            <figure>
+                <img src="https://picsum.photos/id/160/400/300" 
+                     alt="Điện thoại thông minh màn hình gập màu xanh" 
+                     loading="lazy">
+                <figcaption>Smartphone Fold Pro - 25.990.000đ</figcaption>
+            </figure>
+
+            <figure>
+                <img src="https://picsum.photos/id/1/400/300" 
+                     alt="Máy tính xách tay vỏ nhôm nguyên khối" 
+                     loading="lazy">
+                <figcaption>Laptop Ultra Air - 32.500.000đ</figcaption>
+            </figure>
+
+            <figure>
+                <img src="https://picsum.photos/id/2/400/300" 
+                     alt="Máy tính bảng màn hình 12 inch kèm bút" 
+                     loading="lazy">
+                <figcaption>Tablet Creative Gen 2 - 18.200.000đ</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <!-- 2. Video nhúng YouTube (dùng iframe) -->
+    <section>
+        <h2>Video giới thiệu thương hiệu</h2>
+        <iframe height="450" 
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                title="YouTube video player" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+        </iframe>
+    </section>
+
+    <!-- 3. Thẻ <video> với controls, poster, ít nhất 2 <source> -->
+    <section>
+        <h2>Review chi tiết sản phẩm</h2>
+        <video controls poster="https://picsum.photos/id/10/800/450">
+            <source src="sample-video.mp4" type="video/mp4">
+            <source src="sample-video.webm" type="video/webm">
+            Trình duyệt của bạn không hỗ trợ thẻ video.
+        </video>
+    </section>
+
+    <!-- 4. Thẻ <audio> (nhạc nền giới thiệu) -->
+    <section>
+        <h2>Nhạc nền giới thiệu</h2>
+        <p>Thưởng thức giai điệu thư giãn khi tham quan cửa hàng:</p>
+        <audio controls>
+            <source src="background-music.mp3" type="audio/mpeg">
+            Trình duyệt của bạn không hỗ trợ thẻ audio.
+        </audio>
+    </section>
+
+    <footer style="text-align: center; margin-top: 40px; color: #888;">
+        <p>&copy; 2026 Future Store Multimedia Page</p>
+    </footer>
+
+</body>
+</html>
