@@ -1,1 +1,29 @@
+/* 1. Universal selector (0,0,0) */
+* { color: gray; }
 
+/* 2. Element selector (0,0,1) */
+p { color: silver; }
+
+/* 3. Pseudo-element (0,0,2) */
+body p { color: maroon; }
+
+/* 4. Class selector (0,1,0) */
+.text { color: blue; }
+
+/* 5. Multiple classes (0,2,0) */
+.text.highlight { color: green; }
+
+/* 6. Class + Element (0,1,1) */
+p.text { color: purple; }
+
+/* 7. Class + Element + Pseudo-class (0,2,1) */
+p.text:nth-child(1) { color: olive; }
+
+/* 8. ID selector (1,0,0) */
+#demo { color: red; }
+
+/* 9. ID + Element (1,0,1) */
+p#demo { color: orange; }
+
+/* 10. ID + Class (1,1,0) */
+#demo.text { color: teal; }
