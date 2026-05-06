@@ -185,3 +185,15 @@ Giải thích: Vì selector #demo.text có specificity score cao nhất (1, 1, 0
 Kết quả: KHÔNG đổi.
 
 Giải thích: Khi các selector có độ ưu tiên khác nhau, trình duyệt luôn chọn selector có trọng số cao nhất bất kể nó nằm ở vị trí nào trong file. Thứ tự viết code (quy tắc "vào sau thắng") chỉ có tác dụng khi hai selector có cùng mức độ ưu tiên (cùng score).
+
+##Câu C1:
+
+1. Chiều rộng thực tế:
+- Sidebar: 342px
+- Content: 722px
+
+2. Giải thích: Tổng chiều rộng 2 cột (1064px) vượt quá chiều rộng container (960px) nên content bị đẩy xuống.
+
+3. Cách sửa:
+- Cách 1: Thêm box-sizing: border-box cho tất cả phần tử.
+- Cách 2: Giảm width của sidebar xuống 258px và content xuống 598px.
