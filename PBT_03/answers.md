@@ -197,3 +197,33 @@ Giải thích: Khi các selector có độ ưu tiên khác nhau, trình duyệt 
 3. Cách sửa:
 - Cách 1: Thêm box-sizing: border-box cho tất cả phần tử.
 - Cách 2: Giảm width của sidebar xuống 258px và content xuống 598px.
+
+##Câu C2:
+
+1. "Sản phẩm A" (h2 trong #featured)
+font-size: 20px
+
+Giải thích: Selector .card .title nhắm trực tiếp vào thẻ h2 có class .title. Mặc dù thẻ cha .container có font-size: 14px, nhưng quy tắc nhắm trực tiếp (direct target) luôn thắng quy tắc kế thừa (inheritance).
+
+color: green
+
+Giải thích: Có 3 selector cùng tranh chấp: .card { color: blue; } (kế thừa), #featured .title { color: red; } (specificity cao), và .highlight { color: green !important; }. Vì có thuộc tính !important, nên màu xanh lá cây sẽ thắng tuyệt đối bất kể specificity.
+
+2. "Mô tả sản phẩm" (p trong card featured)
+color: blue
+
+Giải thích: Thẻ p này có quy tắc .card p { color: inherit; }. Từ khóa inherit buộc thẻ p phải lấy màu từ thẻ cha trực tiếp của nó là .card. Mà .card đang có thuộc tính color: blue;. Do đó, thẻ p sẽ có màu xanh dương.
+
+3. "Sản phẩm B" (h2 trong card thứ hai)
+font-size: 20px
+
+Giải thích: Tương tự câu 1, selector .card .title nhắm trực tiếp vào thẻ này nên nó nhận giá trị 20px.
+
+color: blue (Kế thừa từ .card)
+
+Giải thích: Trong CSS đã cho, không có selector nào nhắm trực tiếp vào màu sắc của h2 này (vì nó không nằm trong #featured và không có class .highlight). Do đó, nó kế thừa màu từ thẻ cha .card có color: blue;.
+
+4. "Mô tả sản phẩm B" (p.highlight)
+color: green
+
+Giải thích: Mặc dù có quy tắc .card p { color: inherit; } nhắm vào thẻ p, nhưng selector .highlight { color: green !important; } nhắm trực tiếp vào class của thẻ p này và có !important. Trọng số của !important là cao nhất trong quá trình Cascade.
