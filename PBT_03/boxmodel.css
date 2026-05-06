@@ -1,1 +1,59 @@
+/* --- PHẦN 1 --- */
+.box {
+    display: inline-block;
+    width: 300px;
+    padding: 20px;
+    border: 5px solid #333;
+    margin: 10px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
 
+.content-box {
+    box-sizing: content-box; /* Mặc định */
+    background-color: #e74c3c;
+}
+
+.border-box {
+    box-sizing: border-box;
+    background-color: #27ae60;
+}
+
+/* --- PHẦN 2 --- */
+.container {
+    width: 1000px;
+    margin: 20px auto;
+    border: 2px dashed #000;
+    overflow: hidden; /* Để chứa các cột float */
+}
+
+/* Sử dụng border-box để việc tính toán layout dễ dàng hơn */
+.container div, .container aside, .container main {
+    box-sizing: border-box;
+    float: left;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-left {
+    width: 250px;
+    background-color: #ecf0f1; /* nhạt */
+    padding: 15px;
+}
+
+.main-content {
+    width: 500px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+.sidebar-right {
+    width: 250px;
+    background-color: #ecf0f1; /* nhạt */
+    padding: 15px;
+}
