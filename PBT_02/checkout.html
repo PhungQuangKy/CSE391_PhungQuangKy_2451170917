@@ -1,1 +1,176 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán đơn hàng</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; padding: 20px; max-width: 900px; margin: auto; background-color: #f9f9f9; }
+        h1, h2 { color: #2c3e50; border-left: 5px solid #3498db; padding-left: 15px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 30px; background: white; }
+        table, th, td { border: 1px solid #ddd; }
+        th, td { padding: 12px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        tfoot { font-weight: bold; background-color: #eee; }
+        
+        fieldset { border: 1px solid #ddd; padding: 20px; margin-bottom: 20px; border-radius: 8px; background: white; }
+        legend { font-weight: bold; color: #3498db; padding: 0 10px; }
+        
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: 600; }
+        input[type="text"], input[type="date"], select, textarea, input[type="search"] { 
+            width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; 
+        }
+        .radio-group label { display: inline-block; margin-right: 20px; font-weight: normal; }
+        
+        .bonus-section { background: #e8f4fd; padding: 15px; border-radius: 8px; margin-top: 20px; }
+        button { background-color: #27ae60; color: white; padding: 15px 30px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; width: 100%; }
+        button:hover { background-color: #219150; }
+    </style>
+</head>
+<body>
 
+    <h1>Xác nhận Đơn hàng</h1>
+
+    <!-- Phần Nâng cao: Datalist cho tìm kiếm -->
+    <div class="form-group">
+        <label for="product-search">Thêm nhanh sản phẩm khác:</label>
+        <input type="search" id="product-search" list="product-list" placeholder="Gõ để tìm sản phẩm...">
+        <datalist id="product-list">
+            <option value="iPhone 16 Pro Max">
+            <option value="Samsung Galaxy S24 Ultra">
+            <option value="MacBook Pro M3">
+            <option value="AirPods Pro Gen 2">
+            <option value="Ốp lưng MagSafe">
+        </datalist>
+    </div>
+
+    <!-- Phần 1: Giỏ hàng dùng <table> -->
+    <section>
+        <h2>1. Giỏ hàng của bạn</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Sản phẩm</th>
+                    <th>Đơn giá</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>iPhone 16 Pro Max (256GB)</td>
+                    <td>34.990.000đ</td>
+                    <td>1</td>
+                    <td>34.990.000đ</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Ốp lưng Silicon MagSafe</td>
+                    <td>1.200.000đ</td>
+                    <td>2</td>
+                    <td>2.400.000đ</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Sạc dự phòng 20.000mAh</td>
+                    <td>950.000đ</td>
+                    <td>1</td>
+                    <td>950.000đ</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4" style="text-align: right;">Tổng tiền hàng:</td>
+                    <td>38.340.000đ</td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="text-align: right;">Giảm giá (Mã SALE2026):</td>
+                    <td style="color: red;">-200.000đ</td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="text-align: right;">Tổng thanh toán:</td>
+                    <td>
+                        <!-- Nâng cao: Thẻ <output> -->
+                        <output name="total" style="font-size: 1.2em; color: #e67e22;">38.140.000đ</output>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </section>
+
+    <form action="#" method="POST">
+        <!-- Phần 2: Form thanh toán -->
+        <fieldset>
+            <legend>2. Thanh toán & Ưu đãi</legend>
+            <div class="form-group radio-group">
+                <label>Phương thức thanh toán:</label>
+                <input type="radio" id="cod" name="payment" value="cod" checked>
+                <label for="cod">Thanh toán khi nhận hàng (COD)</label>
+                
+                <input type="radio" id="bank" name="payment" value="bank">
+                <label for="bank">Chuyển khoản ngân hàng</label>
+                
+                <input type="radio" id="e-wallet" name="payment" value="wallet">
+                <label for="e-wallet">Ví điện tử (Momo/ZaloPay)</label>
+            </div>
+
+            <div class="form-group">
+                <label for="discount">Mã giảm giá:</label>
+                <input type="text" id="discount" name="discount" 
+                       pattern="^SALE[0-9]{4}$" 
+                       title="Mã phải bắt đầu bằng 'SALE' kèm theo 4 chữ số (VD: SALE2026)"
+                       placeholder="Nhập mã SALE2026">
+            </div>
+
+            <div class="form-group">
+                <label for="note">Ghi chú đơn hàng:</label>
+                <textarea id="note" name="note" rows="3" placeholder="Ghi chú về thời gian hoặc yêu cầu khác..."></textarea>
+            </div>
+        </fieldset>
+
+        <!-- Phần 3: Thông tin giao hàng -->
+        <fieldset>
+            <legend>3. Thông tin vận chuyển</legend>
+            <div class="form-group">
+                <label for="delivery-date">Ngày giao hàng mong muốn:</label>
+                <!-- min="2026-05-07" là ngày mai (giả định hôm nay là 2026-05-06) -->
+                <input type="date" id="delivery-date" name="delivery_date" min="2026-05-07" required>
+            </div>
+
+            <div class="form-group">
+                <label for="time-slot">Khung giờ nhận hàng:</label>
+                <select id="time-slot" name="time_slot">
+                    <option value="morning">Sáng 8h - 12h</option>
+                    <option value="afternoon">Chiều 14h - 18h</option>
+                    <option value="evening">Tối 18h - 21h</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="delivery-range">Giao hàng nhanh (Số ngày: 1 - 7):</label>
+                <input type="range" id="delivery-range" name="delivery_range" min="1" max="7" step="1" value="3" 
+                       oninput="this.nextElementSibling.value = this.value + ' ngày'">
+                <output>3 ngày</output>
+            </div>
+        </fieldset>
+
+        <!-- Nâng cao: Điểm tích lũy bằng progress/meter -->
+        <div class="bonus-section">
+            <label for="points">Điểm tích lũy khách hàng thân thiết:</label>
+            <progress id="points" value="750" max="1000" style="width: 100%; height: 20px;"></progress>
+            <p><small>Bạn đã đạt 750/1000 điểm để nhận voucher 500k!</small></p>
+            
+            <label>Mức độ uy tín tài khoản:</label>
+            <meter value="0.8" min="0" max="1" low="0.3" high="0.7" optimum="0.9"></meter>
+        </div>
+
+        <div style="margin-top: 30px;">
+            <button type="submit" aria-label="Xác nhận đặt hàng">XÁC NHẬN ĐẶT HÀNG</button>
+        </div>
+    </form>
+
+</body>
+</html>
