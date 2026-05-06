@@ -56,3 +56,23 @@ Giải thích tại sao:
 Thứ tự đọc mã: Trình duyệt đọc mã từ trên xuống dưới. Đối với Internal và External, nếu chúng có cùng độ ưu tiên về bộ chọn (selector), thì cái nào được định nghĩa sau cùng sẽ đè lên cái đứng trước (Quy tắc Cascade - Dòng thác).
 
 Lưu ý: Tuy nhiên, nếu có thuộc tính !important ở bất kỳ cách nào, nó sẽ phá vỡ quy luật trên và dành quyền ưu tiên cao nhất.
+
+##Câu A2:
+
+1. Phân tích Selectors
+
+h1 → Chọn: ShopTLU (Vì đây là thẻ h1 duy nhất trong trang).
+
+.price → Chọn: 25.990.000đ và 45.990.000đ (Có hai thẻ <p> có class này trong hai thẻ <article>).
+
+#app header → Chọn: Toàn bộ nội dung bên trong thẻ <header> (Gồm h1 và nav).
+
+nav a:first-child → Chọn: Home (Phần tử <a> đầu tiên nằm trong thẻ nav).
+
+.product.featured h2 → Chọn: MacBook Pro (Thẻ h2 nằm bên trong thẻ <article> có cả hai class là product và featured).
+
+article > p → Chọn: Tất cả các thẻ <p> là con trực tiếp của article (Gồm: 25.990.000đ, Mô tả sản phẩm... của iPhone và 45.990.000đ, Mô tả sản phẩm... của MacBook).
+
+a[href="/"] → Chọn: Home (Thẻ <a> có thuộc tính href chính xác là /).
+
+.top-bar.dark h1 → Chọn: ShopTLU (Thẻ h1 nằm trong thẻ có cả hai class top-bar và dark).
