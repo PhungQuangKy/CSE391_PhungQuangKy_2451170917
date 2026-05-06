@@ -149,3 +149,39 @@ Giải thích sự khác biệt:
 Với content-box, thuộc tính width chỉ áp dụng cho vùng chứa nội dung. Mọi phần đệm (padding) và đường viền (border) sẽ được cộng thêm vào bên ngoài, làm phần tử to ra hơn so với khai báo ban đầu.
 
 Với border-box, thuộc tính width là con số tổng cuối cùng của phần tử. Trình duyệt sẽ tự động trừ đi padding và border để tìm ra không gian còn lại cho content. Điều này giúp lập trình viên kiểm soát layout cực kỳ chính xác.
+
+##Câu B3:
+
+1. Liệt kê 10 rules + specificity score:
+
+* : (0, 0, 0)
+
+p : (0, 0, 1)
+
+body p : (0, 0, 2)
+
+.text : (0, 1, 0)
+
+p.text : (0, 1, 1)
+
+.text.highlight : (0, 2, 0)
+
+p.text:nth-child(1) : (0, 2, 1)
+
+#demo : (1, 0, 0)
+
+p#demo : (1, 0, 1)
+
+#demo.text : (1, 1, 0)
+
+2. Element cuối cùng hiển thị màu gì? Tại sao?
+
+Màu sắc: Teal (Xanh mòng két).
+
+Giải thích: Vì selector #demo.text có specificity score cao nhất (1, 1, 0). Trong CSS, trình duyệt sẽ ưu tiên rule có trọng số cao nhất (so sánh lần lượt từ cột ID, sau đó đến Class, cuối cùng là Element).
+
+4. Thay đổi thứ tự rules trong CSS file. Kết quả có đổi không? Giải thích.
+
+Kết quả: KHÔNG đổi.
+
+Giải thích: Khi các selector có độ ưu tiên khác nhau, trình duyệt luôn chọn selector có trọng số cao nhất bất kể nó nằm ở vị trí nào trong file. Thứ tự viết code (quy tắc "vào sau thắng") chỉ có tác dụng khi hai selector có cùng mức độ ưu tiên (cùng score).
