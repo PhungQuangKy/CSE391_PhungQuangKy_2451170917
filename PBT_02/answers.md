@@ -51,3 +51,22 @@ Trường hợp 5: <input type="password" minlength="8" value="123"> (User gõ "
 Kết quả: Trình duyệt báo lỗi độ dài quá ngắn (ví dụ: "Please lengthen this text to 8 characters or more").
 
 Tại sao: Thuộc tính minlength="8" bắt buộc chuỗi nhập vào phải có ít nhất 8 ký tự. Chuỗi "123" chỉ có 3 ký tự.
+
+##A3:
+
+Tại sao <label for="email"> quan trọng cho người dùng screen reader?
+
+Liên kết dữ liệu: Thuộc tính for kết nối trực tiếp văn bản mô tả với ô nhập liệu (id). Khi người dùng khiếm thị dùng screen reader (trình đọc màn hình) tab vào ô input, thiết bị sẽ đọc to nội dung trong thẻ <label> tương ứng.
+
+Xác định mục đích: Nếu không có <label>, trình đọc màn hình có thể chỉ thông báo là "Edit text, rỗng", khiến người dùng không biết ô đó yêu cầu nhập Email, Họ tên hay Mật khẩu.
+
+Mở rộng vùng tương tác: Giúp người dùng có vấn đề về vận động dễ dàng click vào dòng chữ mô tả để kích hoạt ô nhập liệu thay vì phải click chính xác vào ô input nhỏ.
+
+2. Khi nào dùng <fieldset> + <legend>? Cho ví dụ cụ thể.
+Khi nào dùng: Dùng để nhóm các phần tử có liên quan lại với nhau trong một form dài hoặc phức tạp. Nó giúp tạo ra một ranh giới logic và ngữ nghĩa cho các nhóm dữ liệu.
+
+Tác dụng: <fieldset> bao quanh nhóm, còn <legend> đóng vai trò là tiêu đề cho nhóm đó. Trình đọc màn hình sẽ đọc tiêu đề legend trước khi đọc từng mục bên trong, giúp người dùng hiểu bối cảnh.
+
+Ví dụ cụ thể: Nhóm các câu hỏi về "Địa chỉ nhận hàng" hoặc "Thông tin thanh toán".
+
+``
