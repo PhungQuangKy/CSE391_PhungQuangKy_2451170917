@@ -76,3 +76,58 @@ article > p → Chọn: Tất cả các thẻ <p> là con trực tiếp của ar
 a[href="/"] → Chọn: Home (Thẻ <a> có thuộc tính href chính xác là /).
 
 .top-bar.dark h1 → Chọn: ShopTLU (Thẻ h1 nằm trong thẻ có cả hai class top-bar và dark).
+
+##Câu A3:
+
+Trường hợp 1: content-box (mặc định)
+
+Chiều rộng hiển thị = 450px
+
+(Tính toán: 400px width + 40px padding + 10px border)
+
+Không gian chiếm trên trang = 470px
+
+(Tính toán: 450px chiều rộng hiển thị + 20px margin)
+
+Trường hợp 2: border-box
+
+Chiều rộng hiển thị = 400px
+
+(Vì border-box bao gồm cả padding và border vào trong width đã khai báo)
+
+Kích thước content thực tế = 350px
+
+(Tính toán: 400px width - 40px padding - 10px border)
+
+Không gian chiếm trên trang = 420px
+
+(Tính toán: 400px chiều rộng hiển thị + 20px margin)
+
+Trường hợp 3: Margin collapse
+
+Khoảng cách giữa box-a và box-b = 40px
+
+Giải thích: Khi hai lề dọc (vertical margins) chạm nhau, trình duyệt sẽ gộp chúng lại và chỉ lấy giá trị lớn nhất (40px), chứ không cộng dồn (65px).
+
+Nâng cao: Lề âm (Negative Margin)
+
+Khoảng cách = 30px
+
+Giải thích: Khi gộp lề có lề âm, khoảng cách cuối cùng bằng tổng đại số của lề dương lớn nhất và lề âm (40px + (-10px) = 30px).
+
+##Câu A4:
+
+1. Tính specificity score:
+- Rule A (p): (0, 0, 1)
+- Rule B (.price): (0, 1, 0)
+- Rule C (#main-price): (1, 0, 0)
+- Rule D (p.price): (0, 1, 1)
+
+2. Element có màu đỏ (red). 
+Giải thích: Rule C có ID selector, mang trọng số ưu tiên cao nhất trong 4 quy tắc.
+
+3. Element có màu cam (orange). 
+Giải thích: Inline style có độ ưu tiên cao hơn các selector trong file CSS.
+
+4. Element có màu đen (black). 
+Giải thích: !important phá vỡ mọi quy tắc về Specificity, ép trình duyệt ưu tiên Rule A bất chấp score thấp.
