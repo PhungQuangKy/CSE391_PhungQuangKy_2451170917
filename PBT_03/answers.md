@@ -131,3 +131,21 @@ Giải thích: Inline style có độ ưu tiên cao hơn các selector trong fil
 
 4. Element có màu đen (black). 
 Giải thích: !important phá vỡ mọi quy tắc về Specificity, ép trình duyệt ưu tiên Rule A bất chấp score thấp.
+
+##Câu B2:
+
+Phần 1: So sánh kích thước
+
+Hộp 1 (content-box): Chiều rộng thực tế = 350px
+
+Tính toán: 300px (width) + 20px2 (padding) + 5px2 (border) = 350px.
+
+Hộp 2 (border-box): Chiều rộng thực tế = 300px
+
+Tính toán: Trình duyệt tự co phần content lại còn 250px để tổng cộng (content + padding + border) luôn đúng bằng 300px.
+
+Giải thích sự khác biệt:
+
+Với content-box, thuộc tính width chỉ áp dụng cho vùng chứa nội dung. Mọi phần đệm (padding) và đường viền (border) sẽ được cộng thêm vào bên ngoài, làm phần tử to ra hơn so với khai báo ban đầu.
+
+Với border-box, thuộc tính width là con số tổng cuối cùng của phần tử. Trình duyệt sẽ tự động trừ đi padding và border để tìm ra không gian còn lại cho content. Điều này giúp lập trình viên kiểm soát layout cực kỳ chính xác.
