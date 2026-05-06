@@ -158,3 +158,77 @@ Cách 2 dùng cho các hình ảnh là một đơn vị nội dung độc lập 
 Ví dụ thực tế 1: Danh mục sản phẩm trên trang E-commerce, nơi ảnh sản phẩm đi kèm với tên và giá tiền ngay bên dưới để khách hàng dễ nhìn.
 
 Ví dụ thực tế 2: Một biểu đồ thống kê trong bài báo khoa học kèm theo chú thích "Hình 1.1: Tốc độ tăng trưởng kinh tế năm 2026".
+
+##Câu C1:
+
+Lỗi 1: Dòng 2 — Input "Tên" không có thẻ <label for="..."> và thiếu thuộc tính id, name, required.
+
+Sửa: <label for="name">Tên:</label> <input type="text" id="name" name="name" required>
+
+Lỗi 2: Dòng 4 — Input "Email" thiếu thẻ <label>, thiếu thuộc tính id, name và required.
+
+Sửa: <label for="email">Email:</label> <input type="email" id="email" name="email" placeholder="Email của bạn" required>
+
+Lỗi 3: Dòng 6 — Input "Mật khẩu" thiếu thẻ <label>, thiếu id, name và không có minlength để đảm bảo độ bảo mật tối thiểu.
+
+Sửa: <label for="pwd">Mật khẩu:</label> <input type="password" id="pwd" name="password" minlength="8" placeholder="Mật khẩu" required>
+
+Lỗi 4: Dòng 7 — Ô "Nhập lại mật khẩu" không có thẻ <label> và thiếu name, id để định danh dữ liệu.
+
+Sửa: <label for="re-pwd">Nhập lại mật khẩu:</label> <input type="password" id="re-pwd" name="re_password" placeholder="Nhập lại mật khẩu" required>
+
+Lỗi 5: Dòng 9 — Input "Phone" dùng type="text" thay vì type="tel", thiếu pattern để kiểm tra định dạng số điện thoại.
+
+Sửa: <label for="phone">Phone:</label> <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="0901234567">
+
+Lỗi 6: Dòng 11 — Thẻ <select> không có thẻ <label> mô tả và thiếu thuộc tính name.
+
+Sửa: <label for="city">Thành phố:</label> <select id="city" name="city"><option value="hn">Hà Nội</option><option value="hcm">TP.HCM</option></select>
+
+Lỗi 7: Dòng 16 — Thẻ <label> đồng ý điều khoản thiếu thuộc tính for và thiếu ô <input type="checkbox"> để người dùng tích chọn.
+
+Sửa: <input type="checkbox" id="terms" name="terms" required> <label for="terms">Tôi đồng ý điều khoản</label>
+
+Lỗi 8: Dòng 20 — Thẻ <form> thiếu thuộc tính action và method (Best Practice để xác định nơi gửi dữ liệu và phương thức gửi).
+
+Sửa: <form action="#" method="POST">
+
+##Câu C2:
+
+1. Viết pattern regex cho CMND/CCCD và Số tài khoản
+   
+CMND/CCCD (Đúng 12 chữ số): pattern="[0-9]{12}" hoặc pattern="\d{12}"
+
+Số tài khoản (10-15 chữ số): pattern="[0-9]{10,15}" hoặc pattern="\d{10,15}"
+
+Mã PIN (Đúng 6 chữ số, không hiển thị): Sử dụng type="password" kết hợp với pattern="[0-9]{6}".
+
+2. Giải thích: HTML5 validation đủ an toàn cho ứng dụng ngân hàng chưa? Tại sao?
+   
+Câu trả lời: KHÔNG ĐỦ AN TOÀN.
+
+Lý do: HTML5 validation chỉ là lớp bảo vệ bề mặt trên trình duyệt (Frontend). Người dùng có kỹ thuật có thể dễ dàng vượt qua bằng cách:
+
+Mở Developer Tools (F12) và xóa bỏ các thuộc tính required hoặc pattern trực tiếp trong mã HTML.
+
+Sử dụng các công cụ như Postman hoặc cURL để gửi dữ liệu trực tiếp đến Server mà không thông qua form trình duyệt.
+
+Tắt tính năng JavaScript hoặc dùng các trình duyệt cũ không hỗ trợ đầy đủ HTML5.
+
+3. Liệt kê 3 loại validation mà HTML5 KHÔNG THỂ làm được
+   
+Để thực hiện các loại này, bắt buộc phải dùng JavaScript (thường là gọi API kiểm tra):
+
+Kiểm tra tính duy nhất (Uniqueness): Ví dụ: Kiểm tra xem Email hoặc Số điện thoại này đã có ai đăng ký trong hệ thống chưa. HTML5 không thể truy cập cơ sở dữ liệu để đối chiếu.
+
+So sánh khớp dữ liệu (Comparison): Ví dụ: Kiểm tra ô "Nhập lại mật khẩu" có trùng khớp với ô "Mật khẩu" hay không.
+
+Xác thực logic nghiệp vụ phức tạp (Business Logic): Ví dụ: Kiểm tra xem số tài khoản ngân hàng có thực sự tồn tại hoặc đang hoạt động hay không.
+
+4. Nêu 2 rủi ro bảo mật nếu chỉ validate trên Frontend mà không validate Backend
+   
+Tấn công tiêm nhiễm dữ liệu (Insecure Data Injection): Kẻ tấn công có thể gửi dữ liệu độc hại, chuỗi văn bản cực dài hoặc các đoạn mã Script vào hệ thống, gây hỏng cơ sở dữ liệu hoặc chiếm quyền điều khiển (SQL Injection, XSS) vì Backend tin tưởng tuyệt đối vào dữ liệu nhận được.
+
+Sai lệch dữ liệu hệ thống (Data Integrity Loss): Các bản ghi rác hoặc dữ liệu sai định dạng (ví dụ CCCD chỉ có 5 số thay vì 12) sẽ tràn vào database, làm tê liệt các chức năng xử lý nghiệp vụ ngân hàng về sau (như đối soát, chuyển khoản).
+
+
