@@ -24,4 +24,59 @@ Cơ chế: Khi bạn dùng absolute, trình duyệt sẽ "nhìn" ngược lên t
 
 ##Câu A2:
 
+Trường hợp 1: Flexbox cơ bản
+Dự đoán: 4 items sẽ nằm trên 1 hàng duy nhất. Vì có flex: 1, cả 4 items sẽ tự động co giãn để có chiều rộng bằng nhau và lấp đầy 100% chiều rộng của container.
+
+Sơ đồ:  
+[  Item 1  ][  Item 2  ][  Item 3  ][  Item 4  ]
+
+Trường hợp 2: Flex-wrap  
+Dự đoán: Bố cục gồm 3 hàng, mỗi hàng 2 cột.
+
+Mỗi item chiếm 45% width + 2.5% margin mỗi bên = 50% tổng không gian.
+
+Vì flex-wrap: wrap, cứ 2 items là đủ 100% nên item thứ 3 sẽ bị đẩy xuống hàng mới.
+
+Sơ đồ:  
+[ Item 1 ] [ Item 2 ]
+[ Item 3 ] [ Item 4 ]
+[ Item 5 ] [ Item 6 ]
+
+Trường hợp 3: Alignment  
+Dự đoán: 3 items nằm trên 1 hàng, giãn đều ra sát hai mép và căn giữa theo chiều dọc.
+
+space-between: Item 1 sát trái, Item 3 sát phải, Item 2 nằm chính giữa.
+
+align-items: center: Các item sẽ căn giữa so với chiều cao của container.
+
+Sơ đồ:  
+[Item 1]      [Item 2]      [Item 3]
+
+Trường hợp 4: Grid cố định & linh hoạt  
+Dự đoán: 1 hàng có 3 cột.
+
+Cột 1 và 3 cố định 200px.
+
+Cột 2 (1fr) sẽ chiếm toàn bộ phần diện tích còn lại ở giữa.
+
+Có khoảng cách 20px giữa các cột.
+
+Sơ đồ:  
+[ 200px ] [ --- 1fr --- ] [ 200px ]
+
+Trường hợp 5: Grid Repeat
+Dự đoán: Bố cục gồm 3 hàng.
+
+Hàng 1: 3 items (1, 2, 3).
+
+Hàng 2: 3 items (4, 5, 6).
+
+Hàng 3: Chỉ có 1 item (số 7) nằm ở cột đầu tiên bên trái.
+
+Tất cả các cột có chiều rộng bằng nhau.
+
+Sơ đồ:  
+[ Item 1 ] [ Item 2 ] [ Item 3 ]
+[ Item 4 ] [ Item 5 ] [ Item 6 ]
+[ Item 7 ]
 
