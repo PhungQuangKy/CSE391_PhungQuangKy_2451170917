@@ -1,4 +1,4 @@
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/7e6f65d9-004a-469d-9429-ec084a791c0c" />##Câu A1:
+##Câu A1:
 | Position | Vẫn chiếm chỗ trong flow? | Tham chiếu vị trí | Cuộn theo trang? | Use case |
 |----------|---------------------------|-------------------|------------------|----------|
 | `static` | Có | Theo luồng tài liệu tự nhiên |  | Giá trị mặc định, không cần tùy chỉnh vị trí. |
