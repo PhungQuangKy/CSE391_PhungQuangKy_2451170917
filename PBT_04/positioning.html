@@ -1,1 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Positioning Playground</title>
+    <link rel="stylesheet" href="positioning.css">
+</head>
+<body>
 
+    <!-- 1. Fixed Header -->
+    <header class="header">
+        <div class="logo">MY LOGO</div>
+        <nav class="nav">
+            <a href="#">Home</a>
+            <a href="#">Products</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <!-- 2. Sticky Sidebar -->
+        <aside class="sidebar">
+            <h3>Menu Sidebar</h3>
+            <ul>
+                <li>Danh mục 1</li>
+                <li>Danh mục 2</li>
+                <li>Danh mục 3</li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            <h1>Danh sách sản phẩm</h1>
+            <div class="product-grid">
+                <!-- 3. Product Card với Badge HOT -->
+                <div class="product-card">
+                    <span class="badge">HOT</span>
+                    <div class="product-img"></div>
+                    <p>Sản phẩm cực chất</p>
+                </div>
+                <!-- Copy thêm card để test scroll -->
+                <div class="product-card"></div>
+                <div class="product-card"></div>
+                <div class="product-card"></div>
+            </div>
+            <!-- Thêm nội dung giả để trang có thể cuộn -->
+            <div style="height: 1500px;"></div>
+        </main>
+    </div>
+
+    <!-- 4. Scroll to top button -->
+    <button class="scroll-top">↑</button>
+
+</body>
+</html>
