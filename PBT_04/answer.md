@@ -80,3 +80,33 @@ Sơ đồ:
 [ Item 4 ] [ Item 5 ] [ Item 6 ]
 [ Item 7 ]
 
+##Câu C1:  
+1. Navigation bar ngang (logo + menu + buttons)
+
+Lựa chọn: Flexbox.
+
+Giải thích: Thanh điều hướng thường là bố cục một chiều (hàng ngang). Flexbox rất mạnh trong việc phân bổ không gian dọc theo trục chính, giúp dễ dàng đẩy logo sang trái, menu ra giữa và buttons sang phải bằng justify-content.
+
+2. Lưới ảnh Instagram (3 cột đều nhau, số ảnh không biết trước)
+
+Lựa chọn: Grid.
+
+Giải thích: Đây là bố cục dạng lưới hai chiều hoàn hảo. Với grid-template-columns: repeat(3, 1fr), bạn có thể đảm bảo các cột luôn đều nhau. Grid tự động xử lý việc rớt hàng cho số lượng ảnh không xác định mà không cần tính toán phức tạp như Flexbox.
+
+3. Layout blog: main content + sidebar
+
+Lựa chọn: Grid (hoặc kết hợp cả hai).
+
+Giải thích: Grid phù hợp nhất để xây dựng khung sườn (vỏ ngoài) của trang web. Nó giúp định vị chính xác vị trí của Content và Sidebar trên cùng một hệ thống lưới, giữ cho bố cục ổn định và dễ quản lý hơn khi thay đổi kích thước màn hình.
+
+4. Footer với 4 cột thông tin
+
+Lựa chọn: Kết hợp cả hai.
+
+Giải thích: Sử dụng Grid để chia toàn bộ Footer thành 4 cột đều nhau (cấu trúc tổng thể). Sau đó, sử dụng Flexbox bên trong mỗi cột để sắp xếp các danh sách liên kết theo chiều dọc và căn chỉnh icon mạng xã hội.
+
+5. Card sản phẩm (ảnh trên, text giữa, nút dưới — nút luôn dính đáy)
+
+Lựa chọn: Flexbox.
+
+Giải thích: Mặc dù card có cấu trúc dọc, nhưng Flexbox với flex-direction: column là giải pháp tối ưu để xử lý tình huống "nút dính đáy". Bạn chỉ cần đặt margin-top: auto cho nút bấm, nó sẽ tự động bị đẩy xuống dưới cùng của card bất kể độ dài của phần text ở giữa.
