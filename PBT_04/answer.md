@@ -1,4 +1,4 @@
-##Câu A1:
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/7e6f65d9-004a-469d-9429-ec084a791c0c" />##Câu A1:
 | Position | Vẫn chiếm chỗ trong flow? | Tham chiếu vị trí | Cuộn theo trang? | Use case |
 |----------|---------------------------|-------------------|------------------|----------|
 | `static` | Có | Theo luồng tài liệu tự nhiên |  | Giá trị mặc định, không cần tùy chỉnh vị trí. |
@@ -110,3 +110,61 @@ Giải thích: Sử dụng Grid để chia toàn bộ Footer thành 4 cột đ�
 Lựa chọn: Flexbox.
 
 Giải thích: Mặc dù card có cấu trúc dọc, nhưng Flexbox với flex-direction: column là giải pháp tối ưu để xử lý tình huống "nút dính đáy". Bạn chỉ cần đặt margin-top: auto cho nút bấm, nó sẽ tự động bị đẩy xuống dưới cùng của card bất kể độ dài của phần text ở giữa.
+
+##Câu C2:
+
+Lỗi 1: Cards không đều chiều cao — nút "Mua" bị nhảy lên/xuống  
+Nguyên nhân: Mặc định, các thẻ .card (flex items) sẽ có chiều cao bằng nhau nhờ thuộc tính align-items: stretch của cha. Tuy nhiên, các thành phần bên trong mỗi card (tiêu đề, văn bản) có độ dài khác nhau khiến nút bấm không nằm thẳng hàng ở đáy.
+
+Cách sửa: Thiết lập thẻ .card thành một flex container theo chiều dọc và sử dụng margin-top: auto cho nút bấm.
+
+Code sửa:
+```css
+.card {
+    width: 30%;
+    margin: 1.5%;
+    display: flex;          /* Biến card thành flex container */
+    flex-direction: column; /* Xếp nội dung theo cột */
+}
+
+.card .btn {
+    padding: 10px;
+    margin-top: auto;      /* Đẩy nút xuống sát đáy card */
+}
+```
+
+Lỗi 2: Items không căn giữa cả ngang lẫn dọc trong container 100vh  
+Nguyên nhân: Thuộc tính text-align: center chỉ có tác dụng căn giữa văn bản theo chiều ngang bên trong thẻ con. Nó không giúp căn giữa bản thân thẻ .hero-content bên trong vùng chứa .hero.
+
+Cách sửa: Sử dụng bộ đôi justify-content và align-items trên flex container cha (.hero).
+
+Code sửa:
+```css
+.hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center;     /* Căn giữa theo chiều dọc */
+}
+
+.hero-content {
+    /* Không cần text-align nếu chỉ muốn căn giữa khối */
+}
+```
+
+Lỗi 3: Sidebar bị co lại khi content quá dài
+Nguyên nhân: Theo cơ chế mặc định của Flexbox, thuộc tính flex-shrink có giá trị là 1, cho phép các phần tử co lại nếu không gian cha bị thiếu. Khi phần .content quá dài, nó sẽ lấn át và ép width: 250px của sidebar nhỏ lại.
+
+Cách sửa: Thiết lập flex-shrink: 0 cho sidebar để ngăn chặn việc bị co lại, hoặc sử dụng thuộc tính flex: 0 0 250px.
+
+Code sửa:
+```css
+.sidebar {
+    width: 250px;
+    flex-shrink: 0; /* Ngăn sidebar bị co lại */
+}
+
+.content {
+    flex: 1; /* Chiếm toàn bộ phần còn lại */
+}
+```
