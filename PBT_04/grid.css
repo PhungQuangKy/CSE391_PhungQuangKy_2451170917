@@ -1,1 +1,93 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
+body {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+}
+
+/* Định dạng container chung */
+.grid-container {
+    display: grid;
+    /* Thiết lập 4 cột có chiều rộng bằng nhau */
+    grid-template-columns: repeat(4, 1fr);
+    /* Thiết lập các hàng tự động hoặc cố định */
+    grid-template-rows: 80px 60px 400px 100px;
+    gap: 15px;
+    
+    /* Định nghĩa vùng layout bằng Area Names */
+    grid-template-areas: 
+        "header header header header"
+        "nav nav nav nav"
+        "main main sidebar sidebar"
+        "footer footer extra extra";
+}
+
+/* Gán Area Name cho từng class */
+.header {
+    grid-area: header;
+    background-color: #3498db;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav {
+    grid-area: nav;
+    background-color: #2ecc71;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main {
+    grid-area: main;
+    background-color: #e67e22;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar {
+    grid-area: sidebar;
+    background-color: #9b59b6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.extra {
+    grid-area: extra;
+    background-color: #1abc9c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer {
+    grid-area: footer;
+    background-color: #34495e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Responsive: Chuyển về 1 cột trên màn hình điện thoại */
+@media (max-width: 600px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "header"
+            "nav"
+            "main"
+            "sidebar"
+            "extra"
+            "footer";
+    }
+}
