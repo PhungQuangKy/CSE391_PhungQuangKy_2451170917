@@ -111,3 +111,114 @@ Trình duyệt web chỉ có khả năng hiểu và xử lý các file CSS tiêu
 Để chuyển đổi, chúng ta cần một bước gọi là **Compilation (Biên dịch)**:
 * Sử dụng một trình biên dịch (Compiler) như **Sass (Dart Sass)**, **Node-sass** hoặc các công cụ tích hợp trong VS Code (như Live Sass Compiler).
 * Công cụ này sẽ quét file `.scss`, xử lý các logic bên trong và xuất ra một file `.css` thuần túy để liên kết (link) vào file HTML.
+
+---
+
+## Câu C1: Phân tích trang web thực (YouTube.com)
+
+### 1. Hình ảnh minh họa trên 3 kích thước màn hình
+*(Lưu ý: Bạn hãy mở YouTube trên trình duyệt, nhấn F12, chọn biểu tượng điện thoại và chụp màn hình tương ứng với các kích thước dưới đây rồi chèn ảnh vào)*
+
+| Mobile (375px) | Tablet (768px) | Desktop (1440px) |
+| :---: | :---: | :---: |
+| ![Mobile Screenshot](link_anh_cua_ban) | ![Tablet Screenshot](link_anh_cua_ban) | ![Desktop Screenshot](link_anh_cua_ban) |
+
+### 2. Phân tích chi tiết
+
+* **Navigation (Thanh điều hướng):**
+    * **Desktop:** Menu bên trái hiển thị đầy đủ danh sách (Home, Subscriptions, Library...).
+    * **Tablet:** Menu bên trái thu gọn lại chỉ còn các icon (Mini Sidebar).
+    * **Mobile:** Menu bên trái biến mất hoàn toàn. Thanh điều hướng chính chuyển xuống dưới cùng của màn hình (Bottom Navigation) để tiện cho việc thao tác bằng một tay.
+* **Lưới Content (Video Grid):**
+    * **Desktop:** Hiển thị 4 hoặc 5 video trên một hàng.
+    * **Tablet:** Thu lại còn 2 hoặc 3 video trên một hàng.
+    * **Mobile:** Chỉ hiển thị 1 video duy nhất chiếm trọn chiều ngang màn hình để tối ưu kích thước hình ảnh (Thumbnail).
+* **Các Element bị ẩn trên Mobile:**
+    * Thanh Sidebar bên trái bị ẩn đi.
+    * Các nút chức năng phụ trong trình phát video (như nút "Clip", "Save" đôi khi bị đưa vào menu ba chấm).
+    * Phần "Comments" thường bị thu gọn lại, người dùng phải nhấn vào mới xem được.
+* **Font size:**
+    * Có sự thay đổi nhẹ. Tiêu đề video trên Desktop thường lớn và đậm hơn, trong khi trên Mobile kích thước font chữ được giảm xuống một chút để không chiếm quá nhiều diện tích hiển thị nhưng vẫn đảm bảo độ dễ đọc.
+
+### 3. Media Queries tìm thấy trong DevTools
+*(Bạn mở F12 -> tab Styles -> tìm từ khóa "@media". Dưới đây là 2 ví dụ điển hình của YouTube)*
+
+1.  **Mốc cho Tablet:**
+    ```css
+    @media (min-width: 792px) {
+        ytd-rich-grid-renderer {
+            --ytd-rich-grid-items-per-row: 3;
+        }
+    }
+    ```
+2.  **Mốc cho Mobile:**
+    ```css
+    @media (max-width: 480px) {
+        #chips-wrapper.ytd-feed-filter-chip-bar-renderer {
+            display: none;
+        }
+    }
+    ```
+
+    ---
+
+## Câu C2: Thiết kế Responsive Strategy - Trang Đặt Bàn Nhà Hàng
+
+### 1. Mô tả Wireframe (Sơ đồ bố cục)
+
+| Thành phần | Mobile (375px) | Tablet (768px) | Desktop (1440px) |
+| :--- | :--- | :--- | :--- |
+| **Header** | Logo căn trái, nút gọi điện căn phải. | Logo căn trái, số điện thoại hiển thị đầy đủ bên phải. | Logo và Menu điều hướng trải ngang. |
+| **Hero Image** | Chiếm 100% chiều rộng, chiều cao thấp (300px). | Chiếm 100% chiều rộng, chiều cao trung bình (450px). | Chiếm 100% chiều rộng, chiều cao lớn (600px). |
+| **Grid Ảnh Món Ăn** | **1 cột** (dàn hàng dọc). | **2 cột** (mỗi hàng 2 ảnh). | **3 cột** (mỗi hàng 3 ảnh). |
+| **Form Đặt Bàn** | Nằm dưới Grid ảnh, chiếm 100% chiều rộng. | Nằm dưới Grid ảnh, thu gọn vào giữa (width 80%). | **Nằm bên trái** (chia layout chính thành 2 cột). |
+| **Google Maps** | Dưới Form, chiếm 100% chiều rộng. | Dưới Form, chiếm 100% chiều rộng. | **Nằm bên phải** Form đặt bàn. |
+| **Footer** | Các cột thông tin xếp chồng lên nhau. | Chia thành 2 cột. | Chia thành 4 cột trải ngang. |
+
+**Chi tiết phân tích:**
+* **Mobile:** Không ẩn gì quan trọng, nhưng Hero Image có thể ẩn bớt các chi tiết rườm rà. Form nằm ngay sau danh sách món ăn để người dùng dễ đặt bàn sau khi xem ảnh.
+* **Tablet:** Grid ảnh chia 2 cột để tận dụng chiều ngang. Bản đồ vẫn nằm dưới cùng để ưu tiên Form.
+* **Desktop:** Layout chia làm 2 cột lớn (Sidebar layout). Bên trái là Form, bên phải là Bản đồ để người dùng vừa điền vừa xem vị trí.
+
+---
+
+### 2. CSS Skeleton (Grid + Mobile-First)
+
+```css
+/* 1. Mặc định cho Mobile (< 768px) */
+.header { display: flex; justify-content: space-between; }
+.hero { width: 100%; height: 300px; }
+
+.food-grid { 
+    display: grid; 
+    grid-template-columns: 1fr; /* 1 cột */
+    gap: 15px; 
+}
+
+.booking-section {
+    display: grid;
+    grid-template-columns: 1fr; /* Form và Map xếp chồng */
+}
+
+/* 2. Tablet (>= 768px) */
+@media (min-width: 768px) {
+    .food-grid { 
+        grid-template-columns: repeat(2, 1fr); /* 2 cột */
+    }
+    .hero { height: 450px; }
+}
+
+/* 3. Desktop (>= 1200px) */
+@media (min-width: 1200px) {
+    .food-grid { 
+        grid-template-columns: repeat(3, 1fr); /* 3 cột */
+    }
+    
+    .booking-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Form bên trái, Map bên phải */
+        gap: 30px;
+    }
+    
+    .hero { height: 600px; }
+}
