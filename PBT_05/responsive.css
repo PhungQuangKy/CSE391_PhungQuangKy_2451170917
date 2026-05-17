@@ -1,0 +1,22 @@
+/* Reset căn bản */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, sans-serif; font-size: 14px; }
+
+img { max-width: 100%; height: auto; }
+
+/* Header Mobile */
+.header { display: flex; justify-content: space-between; padding: 1rem; background: #333; color: white; }
+.nav-menu { display: none; } /* Ẩn menu ngang trên mobile */
+.hamburger { cursor: pointer; font-size: 1.5rem; }
+
+/* Main Layout Mobile */
+.sidebar, .ads-bar { display: none; } /* Ẩn theo yêu cầu */
+.product-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* 1 cột */
+    gap: 15px;
+    padding: 15px;
+}
+.card { border: 1px solid #ddd; padding: 10px; text-align: center; }
+
+.footer { text-align: center; padding: 1rem; background: #f4f4f4; }
