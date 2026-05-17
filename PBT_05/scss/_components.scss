@@ -1,0 +1,45 @@
+.product-card {
+    background-color: $light-color;
+    padding: $spacing-md;
+    border-radius: $spacing-sm;
+    @include card-shadow; // Sử dụng mixin
+
+    .card-image {
+        width: 100%;
+        border-radius: $spacing-sm;
+        overflow: hidden;
+        
+        img {
+            display: block;
+            transition: transform 0.3s;
+        }
+    }
+
+    .card-title {
+        color: $dark-color;
+        font-family: $font-primary;
+        margin-top: $spacing-sm;
+    }
+
+    &:hover {
+        .card-image img {
+            transform: scale(1.1);
+        }
+    }
+
+    &.featured {
+        border: 2px solid $secondary-color;
+    }
+}
+
+.header {
+    @include flex-center; // Sử dụng mixin
+    background-color: $dark-color;
+    height: 60px;
+    
+    .nav-list {
+        display: flex;
+        gap: $spacing-md;
+        list-style: none;
+    }
+}
