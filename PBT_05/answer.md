@@ -1,4 +1,4 @@
-<img width="1030" height="233" alt="image" src="https://github.com/user-attachments/assets/e1eab332-a4fb-49cd-957b-9a3dd0d68b30" />##Câu A1:
+##Câu A1:
 1. Thẻ <meta viewport> chuẩn và giải thích  
 Cấu trúc chuẩn nhất thường dùng trong HTML5:  
 <meta name="viewport" content="width=device-width, initial-scale=1.0">  
