@@ -1,0 +1,125 @@
+/* Reset cơ bản */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+}
+
+/* --- PHẦN 1: NAVBAR --- */
+.navbar {
+    display: flex;
+    justify-content: space-between; /* Đẩy 3 cụm về 2 đầu và giữa */
+    align-items: center;           /* Vertical centering hoàn hảo */
+    background-color: #fff;
+    padding: 15px 50px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 30px; /* Items cách đều nhau */
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #007bff;          /* Đổi màu khi hover */
+    text-decoration: underline; /* Underline khi hover */
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    text-decoration: none;
+    padding: 8px 15px;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    color: #007bff;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* --- PHẦN 2: PRODUCT CARDS GRID --- */
+.container {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+.product-grid {
+    display: flex;
+    flex-wrap: wrap; /* Cho phép rớt dòng */
+    gap: 20px;       /* Khoảng cách giữa các card */
+}
+
+.card {
+    /* 4 cột: mỗi cột 25% trừ đi phần gap */
+    flex: 0 0 calc(25% - 15px); 
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column; /* Bố cục dọc bên trong card */
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* Card hover effect */
+.card:hover {
+    transform: translateY(-5px); /* Bay lên 5px */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15); /* Box-shadow tăng */
+}
+
+.card-img {
+    width: 100%;
+    height: 150px;
+    background-color: #eee;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+.card-info {
+    margin-bottom: 15px;
+}
+
+.buy-btn {
+    margin-top: auto; /* Nút luôn dính sát đáy card */
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.buy-btn:hover {
+    background-color: #218838;
+}
+
+/* Responsive cơ bản cho mobile */
+@media (max-width: 992px) {
+    .card { flex: 0 0 calc(50% - 10px); } /* 2 cột trên tablet */
+}
+@media (max-width: 576px) {
+    .card { flex: 0 0 100%; } /* 1 cột trên điện thoại */
+    .navbar { flex-direction: column; gap: 15px; }
+}
