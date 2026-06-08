@@ -112,13 +112,24 @@ Trong JavaScript, chỉ có duy nhất 8 giá trị sau đây được coi là *
 
 **Kết luận:** Những chữ cái được in ra màn hình là: **A, C, D, G, H**.
 
-## Câu A5: Template Literals
+### Câu A5 (5đ) — Template Literals
 
-Dưới đây là 3 cách nối chuỗi được viết lại bằng cú pháp Template Literal (sử dụng dấu backtick \` và biểu thức `${}`):
+Dưới đây là 3 cách nối chuỗi được viết lại bằng cú pháp **Template Literal (backtick `)** giúp code sạch sẽ và dễ đọc hơn:
 
-### Cách 1: Nối chuỗi cơ bản
 ```javascript
-// Trước: var greeting = "Xin chào " + name + "! Bạn " + age + " tuổi.";
+// Cách 1:
 var greeting = `Xin chào ${name}! Bạn ${age} tuổi.`;
+
+// Cách 2:
+var url = `https://api.example.com/users/${userId}/orders?page=${page}`;
+
+// Cách 3:
+var html = `
+<div class="card">
+    <h2>${title}</h2>
+    <p>${description}</p>
+    <span>Giá: ${price}đ</span>
+</div>
+`;
 
 
