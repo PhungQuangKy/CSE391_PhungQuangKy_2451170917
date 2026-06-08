@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinite Scroll Gallery</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="gallery-container">
+        <h1>Hình Ảnh Vô Hạn (Infinite Gallery)</h1>
+        
+        <div id="gallery-grid" class="gallery-grid"></div>
+
+        <div id="load-trigger" class="loading-indicator">
+            <div class="spinner"></div>
+            <p>Đang tải thêm ảnh...</p>
+        </div>
+    </div>
+
+    <div id="lightbox-modal" class="lightbox hidden">
+        <span id="close-lightbox" class="lightbox-close">&times;</span>
+        <img id="lightbox-img" class="lightbox-content" src="" alt="Large View">
+    </div>
+
+    <script src="script.js"></script>
+</body>
