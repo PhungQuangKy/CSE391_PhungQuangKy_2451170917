@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard Shortcuts & Accessibility</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Accessible Gallery & Command Palette</h1>
+            <p>Sử dụng <kbd>Tab</kbd> để di chuyển, <kbd>Ctrl</kbd> + <kbd>K</kbd> để mở Command Palette</p>
+        </header>
+
+        <main class="gallery-section">
+            <div class="gallery-grid" role="list" aria-label="Bộ sưu tập ảnh">
+                </div>
+        </main>
+
+        <div id="lightboxModal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Xem chi tiết ảnh">
+            <button class="modal-close" id="closeModalBtn" aria-label="Đóng bảng xem ảnh (Esc)">×</button>
+            <div class="modal-content">
+                <button class="nav-btn prev-btn" id="prevBtn" aria-label="Ảnh trước (Mũi tên trái)">‹</button>
+                <div class="image-container">
+                    <img id="modalImg" src="" alt="">
+                    <div id="slideshowBadge" class="slideshow-badge" aria-live="polite">Slideshow: Tắt</div>
+                </div>
+                <button class="nav-btn next-btn" id="nextBtn" aria-label="Ảnh tiếp theo (Mũi tên phải)">›</button>
+            </div>
+            <div class="modal-caption" id="modalCaption"></div>
+        </div>
+
+        <div id="commandPalette" class="palette-overlay" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Bảng lệnh điều hướng">
+            <div class="palette-box">
+                <input type="text" id="paletteSearch" placeholder="Gõ từ khóa lệnh (ví dụ: Xem, Mở, Bật, Tắt...)" aria-label="Tìm kiếm lệnh hệ thống" autocomplete="off">
+                <ul id="commandList" class="command-list" role="listbox" aria-label="Danh sách lệnh khả dụng">
+                    </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
