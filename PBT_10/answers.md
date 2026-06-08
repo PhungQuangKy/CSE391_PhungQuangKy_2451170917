@@ -105,3 +105,75 @@ graph TD
     style B fill:#9f9,stroke:#333,stroke-width:2px
     style C fill:#f99,stroke:#333,stroke-width:2px
 ```
+
+##Câu C1:
+
+## 1. Network Errors (Mất mạng giữa chừng)
+
+### Cách xử lý:
+* **Nhận biết:** Trong JavaScript, hàm `fetch()` sẽ bị `reject` và ném ra một lỗi mạng (thường là một instance của `TypeError: Failed to fetch`) **chỉ khi** có lỗi mạng xảy ra (mất kết nối internet hoàn toàn, DNS failure, CORS block hoặc server không phản hồi ở tầng TCP). Nó không bị reject khi server trả về các mã lỗi HTTP như 404 hay 500.
+* **Chiến lược xử lý cho E-Commerce:**
+  1. **Thông báo phía User Interface (UI):** Hiển thị một thông báo rõ ràng như *"Mất kết nối Internet. Vui lòng kiểm tra lại mạng của bạn!"* dưới dạng Toast Notification hoặc một Banner cảnh báo trạng thái offline ở đầu trang.
+  2. **Offline Mode / Caching:** Đối với ứng dụng E-Commerce, nếu người dùng đang xem danh sách sản phẩm hoặc chi tiết giỏ hàng, ta nên dùng dữ liệu đã được lưu trong `localStorage`, `IndexedDB` hoặc `Cache Storage` (Service Worker) để hiển thị tạm thời thay vì màn hình trắng xóa hoặc báo lỗi hệ thống thô kệch.
+  3. **Lắng nghe sự kiện hệ thống:** Sử dụng sự kiện `window.addEventListener('online', ...)` để tự động tải lại dữ liệu hoặc gửi lại các request quan trọng khi mạng được khôi phục.
+
+---
+
+## 2. API Errors (Server trả về 500, 404, 429)
+
+### Cách xử lý:
+Khi `fetch()` thành công ở tầng mạng, nó trả về một đối tượng `Response`. Ta cần kiểm tra thuộc tính `response.ok` (bằng `true` nếu status code nằm trong khoảng 200–299). Nếu `response.ok` là `false`, ta sẽ đọc mã `status` để xử lý phân loại:
+
+* **Lỗi 404 (Not Found):**
+  * *Tình huống:* Sản phẩm không tồn tại (đã bị xóa khỏi store), danh mục không hợp lệ.
+  * *Xử lý:* Điều hướng người dùng về trang "404 Not Found" tùy biến của app, hoặc hiển thị thông báo *"Sản phẩm này hiện không còn tồn tại"* kèm theo gợi ý các sản phẩm tương tự để giữ chân khách hàng.
+* **Lỗi 429 (Too Many Requests):**
+  * *Tình huống:* Người dùng hoặc mã độc đang spam bấm nút áp mã giảm giá (Coupon), hoặc liên tục reload trang thanh toán quá số lần cấu hình của Rate Limiter trên Server.
+  * *Xử lý:* Hiển thị thông báo *"Hệ thống đang quá tải do nhận được quá nhiều yêu cầu từ bạn. Vui lòng thử lại sau ít phút."*. Đọc header `Retry-After` từ server trả về (nếu có) để vô hiệu hóa (disable) nút bấm trong đúng khoảng thời gian yêu cầu nhằm giảm tải cho server.
+* **Lỗi 500 (Internal Server Error):**
+  * *Tình huống:* Lỗi logic phía Database, crash source code của server khi tính toán đơn hàng.
+  * *Xử lý:* Cần tuyệt đối giấu các stack trace kỹ thuật trước người dùng cuối. Hiển thị thông báo thân thiện: *"Hệ thống đang gặp sự cố kỹ thuật. Chúng tôi đang xử lý, xin lỗi vì sự bất tiện này!"*. Đồng thời, ngầm ghi nhận log lỗi này về các hệ thống giám sát tập trung (như Sentry, LogRocket) để đội ngũ Dev kịp thời hotfix.
+
+---
+
+## 3. Timeout (API chậm > 10 giây)
+
+### Viết code `fetchWithTimeout(url, ms)`:
+Để hủy một request khi quá thời gian chờ, ta sử dụng `AbortController`.
+
+```javascript
+/**
+ * Thực hiện gọi API với cơ chế Timeout tự động hủy request
+ * @param {string} url - Đường dẫn API cần gọi
+ * @param {number} ms - Thời gian chờ tối đa (mili-giây)
+ * @param {object} options - Các cấu hình fetch bổ sung (method, headers, body...)
+ */
+async function fetchWithTimeout(url, ms = 10000, options = {}) {
+    // Tạo một instance của AbortController
+    const controller = new AbortController();
+    const { signal } = controller;
+
+    // Thiết lập đếm ngược thời gian để hủy request
+    const timeoutId = setTimeout(() => {
+        controller.abort(); // Gửi tín hiệu hủy request
+    }, ms);
+
+    try {
+        const response = await fetch(url, { ...options, signal });
+        
+        // Xóa bộ đếm thời gian nếu request hoàn thành trước khi timeout
+        clearTimeout(timeoutId);
+        
+        return response;
+    } catch (error) {
+        clearTimeout(timeoutId);
+        
+        // Kiểm tra xem lỗi có phải do chính ta chủ động Abort (Timeout) hay không
+        if (error.name === 'AbortError') {
+            throw new Error(`API Request Timeout: Không nhận được phản hồi sau ${ms / 1000} giây.`);
+        }
+        
+        // Nếu là lỗi mạng khác thì ném tiếp ra ngoài
+        throw error;
+    }
+}
