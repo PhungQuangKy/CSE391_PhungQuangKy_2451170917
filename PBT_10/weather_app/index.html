@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App - Thủy Lợi University</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="weather-container">
+        <h2>Dự Báo Thời Tiết</h2>
+        
+        <div class="search-box">
+            <input type="text" id="city-input" placeholder="Nhập tên thành phố (vd: Hanoi, Tokyo)...">
+            <button id="search-btn">Tìm</button>
+        </div>
+
+        <div class="history-section">
+            <h4>Lịch sử tìm kiếm:</h4>
+            <div id="history-list" class="history-list"></div>
+        </div>
+
+        <div class="weather-body">
+            <div id="loading-state" class="state-item hidden">
+                <div class="spinner"></div>
+                <p>Đang tải dữ liệu thời tiết...</p>
+            </div>
+
+            <div id="error-state" class="state-item hidden">
+                <p class="error-text">❌ Lỗi: Không tìm thấy thành phố hoặc mất kết nối mạng!</p>
+            </div>
+
+            <div id="success-state" class="state-item hidden">
+                <h3 id="weather-city">Hanoi</h3>
+                <div class="weather-info">
+                    <img id="weather-icon" src="" alt="Weather Icon">
+                    <h1 id="weather-temp">--°C</h1>
+                </div>
+                <p id="weather-desc">Mây rải rác</p>
+                <div class="weather-details">
+                    <p>💧 Độ ẩm: <span id="weather-humidity">--%</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
