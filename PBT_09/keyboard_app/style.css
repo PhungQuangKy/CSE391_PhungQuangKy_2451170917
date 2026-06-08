@@ -1,0 +1,212 @@
+:root {
+    --bg-app: #0f172a;
+    --bg-card: #1e293b;
+    --text-main: #f8fafc;
+    --primary: #3b82f6;
+    --focus-ring: #22c55e;
+}
+
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-app);
+    color: var(--text-main);
+    margin: 0;
+    padding: 20px;
+}
+
+.app-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+kbd {
+    background: #334155;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* --- Focus Management Ring --- */
+*:focus-visible {
+    outline: 3px solid var(--focus-ring) !important;
+    outline-offset: 3px;
+}
+
+/* Gallery Layout */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.gallery-item {
+    background: var(--bg-card);
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s;
+}
+
+.gallery-item:hover {
+    transform: scale(1.03);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.photo-number {
+    position: absolute;
+    top: 10px; left: 10px;
+    background: rgba(0,0,0,0.7);
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+/* --- Lightbox Modal --- */
+.modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal[aria-hidden="false"] {
+    display: flex;
+}
+
+.modal-content {
+    display: flex;
+    align-items: center;
+    max-width: 90%;
+    max-height: 70vh;
+}
+
+.image-container {
+    position: relative;
+}
+
+#modalImg {
+    max-width: 100%;
+    max-height: 70vh;
+    border-radius: 4px;
+    display: block;
+}
+
+.slideshow-badge {
+    position: absolute;
+    bottom: 15px; left: 15px;
+    background: var(--primary);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 4rem;
+    cursor: pointer;
+    padding: 0 20px;
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px; right: 30px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+}
+
+.modal-caption {
+    margin-top: 15px;
+    font-size: 18px;
+    color: #cbd5e1;
+}
+
+/* --- Command Palette --- */
+.palette-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    padding-top: 10vh;
+    z-index: 2000;
+}
+
+.palette-overlay[aria-hidden="false"] {
+    display: flex;
+}
+
+.palette-box {
+    background: #1e293b;
+    width: 100%;
+    max-width: 550px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.5);
+    overflow: hidden;
+    height: fit-content;
+}
+
+#paletteSearch {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 16px;
+    background: #0f172a;
+    border: none;
+    border-bottom: 1px solid #334155;
+    color: white;
+    font-size: 16px;
+}
+
+#paletteSearch:focus {
+    outline: none;
+}
+
+.command-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.command-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.command-item[aria-selected="true"], .command-item:hover {
+    background: var(--primary);
+}
+
+.command-shortcut {
+    font-size: 12px;
+    opacity: 0.6;
+}
