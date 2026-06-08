@@ -131,5 +131,44 @@ var html = `
     <span>Giá: ${price}đ</span>
 </div>
 `;
+```
 
 
+### Câu C1 (10đ) — Debug JavaScript
+
+Dưới đây là danh sách chi tiết các lỗi tìm thấy (bao gồm cả lỗi ẩn liên quan đến `var` trong vòng lặp), giải thích nguyên nhân, cách sửa và mã nguồn hoàn chỉnh sau khi fix.
+
+---
+
+### I. Danh sách liệt kê và giải thích các lỗi (Ít nhất 6 lỗi)
+
+| STT | Vị trí lỗi / Đoạn code lỗi | Nguyên nhân | Cách sửa |
+| :--- | :--- | :--- | :--- |
+| **1** | Thừa dấu `}` ở dòng số 4: `if (...) { return ... } }` | Dấu đóng ngoặc nhọn `}` bị thừa ngay sau câu lệnh `return`, làm đóng hàm sớm và khiến phần code phía dưới bị lỗi cú pháp. | Xóa bớt một dấu `}` thừa. |
+| **2** | Thiếu dấu chấm phẩy hoặc dấu phân tách lệnh ở dòng 3 và dòng 7. | JavaScript có cơ chế tự động chèn dấu chấm phẩy (ASI), nhưng việc thiếu `;` ở các dòng gán biến hoặc `return` dễ gây lỗi khi gộp code hoặc debug. | Thêm dấu `;` vào cuối các câu lệnh. |
+| **3** | Toán tử gán thay vì so sánh: `if (giaSauGiam = 0)` | Sử dụng một dấu bằng `=` là phép gán giá trị `0` cho biến, kết quả luôn trả về `falsy` khiến khối lệnh bên trong không bao giờ chạy. | Sửa thành toán tử so sánh nghiêm ngặt `===` (`giaSauGiam === 0`). |
+| **4** | Truyền sai kiểu dữ liệu (String thay vì Number): `tinhGiaGiamGia("100000", 20)` | Tham số đầu tiên đang bị truyền dưới dạng chuỗi `"100000"`. Dù JS có tự ép kiểu khi nhân chia, nhưng truyền đúng kiểu số sẽ chuẩn hóa dữ liệu và tránh lỗi logic. | Sửa lại thành kiểu số: `tinhGiaGiamGia(100000, 20)`. |
+| **5** | Gọi sai tên hàm: `tinhGiaGiamGia` vs `tinhGiaGiamGia` (Sai hoa/thường) | Hàm được định nghĩa là `tinhGiaGiamGia` (chữ **G** đầu tiên viết thường), nhưng khi gọi ở dưới Test lại viết là `tinhGiaGiamGia` (chữ **G** viết hoa). JS phân biệt chữ hoa chữ thường nên sẽ báo lỗi `ReferenceError`. | Sửa tất cả các lượt gọi hàm bên dưới thành `tinhGiaGiamGia`. |
+| **6** | **Lỗi ẩn:** Sử dụng `var i = 0` trong vòng lặp kết hợp `setTimeout`. | Do `var` có phạm vi là `function-scope` (hoặc global), cả 5 callback của `setTimeout` đều tham chiếu chung tới một biến `i`. Khi 1 giây trôi qua, vòng lặp đã chạy xong và `i` đã tăng lên `5`. Kết quả là màn hình in ra 5 lần "Item 5" thay vì từ 0 đến 4. | Thay đổi `var` thành `let` để tận dụng cơ chế `block-scope`. Mỗi lần lặp sẽ tạo ra một phạm vi biến `i` độc lập. |
+
+---
+
+### II. Giải thích chi tiết lỗi ẩn của `var` và tại sao sửa bằng `let`
+
+* **Vấn đề với `var`:** Biến khai báo bằng `var` không có phạm vi khối (block scope) mà có phạm vi hàm hoặc toàn cục. Khi vòng lặp `for` chạy, nó thực hiện tăng giá trị của `i` lên cực kỳ nhanh và kết thúc tại `i = 5`. Lúc này, các hàm `setTimeout` mới bắt đầu hết thời gian chờ (1000ms) và xếp hàng để thực thi. Khi chúng chạy và tìm giá trị của `i`, chúng đều nhìn vào biến `i` chung của hệ thống lúc này đã bằng `5`. Do đó kết quả in ra là 5 dòng `Item 5`.
+* **Giải pháp với `let`:** Khi thay thế bằng `let`, `let` hỗ trợ **Block Scope** (phạm vi trong khối ngoặc nhọn `{}`). Mỗi một chu kỳ lặp (iteration) của vòng `for`, JavaScript sẽ tạo ra một môi trường biến `i` hoàn toàn mới và "đóng băng" giá trị của `i` tại thời điểm đó cho hàm `setTimeout` bên trong sử dụng (tương tự cơ chế closure). Vì vậy, kết quả sẽ in đúng thứ tự: `Item 0`, `Item 1`, `Item 2`, `Item 3`, `Item 4`.
+
+---
+
+### III. Đoạn code sau khi đã sửa toàn bộ lỗi
+
+```javascript
+function tinhGiaGiamGia(giaBan, phanTramGiam) {
+    if (phanTramGiam < 0 || phanTramGiam > 100) {
+        return "Phần trăm giảm không hợp lệ";
+    }
+
+    var giamGia = giaBan * phanTramGiam / 100;
+    let giaSauGiam = giaBan - giamGia;
+
+    if
